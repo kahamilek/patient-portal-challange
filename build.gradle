@@ -1,0 +1,55 @@
+plugins {
+    id 'org.jetbrains.kotlin.jvm' version "1.6.21" apply false
+    id 'org.jetbrains.kotlin.plugin.spring' version "1.6.21" apply false
+    id "org.jetbrains.kotlin.plugin.jpa" version "1.6.21" apply false
+    id 'io.spring.dependency-management' version "1.0.11.RELEASE" apply false
+    id 'org.springframework.boot' version "2.7.2" apply false
+}
+
+ext {
+    JVM_TARGET = "17"
+    SPRING_BOOT_VERSION = "2.7.2"
+}
+
+subprojects {
+    apply plugin: "java"
+    apply plugin: "kotlin"
+    apply plugin: "io.spring.dependency-management"
+
+    test {
+        useJUnitPlatform()
+        testLogging {
+            events("passed", "skipped", "failed")
+        }
+    }
+
+    dependencies {
+        implementation "io.github.microutils:kotlin-logging-jvm:2.1.21"
+        implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
+        implementation "org.jetbrains.kotlin:kotlin-reflect"
+
+        testImplementation "io.mockk:mockk:1.12.3"
+    }
+
+    sourceCompatibility = JVM_TARGET
+
+    compileJava.options.encoding = 'UTF-8'
+    compileTestJava.options.encoding = 'UTF-8'
+
+    compileKotlin {
+        kotlinOptions.jvmTarget = "$JVM_TARGET"
+        kotlinOptions.javaParameters = true
+    }
+    compileTestKotlin {
+        kotlinOptions.jvmTarget = "$JVM_TARGET"
+        kotlinOptions.javaParameters = true
+    }
+
+    repositories {
+        mavenCentral()
+    }
+
+    dependencyManagement {
+        imports { mavenBom("org.springframework.boot:spring-boot-dependencies:$SPRING_BOOT_VERSION") }
+    }
+}

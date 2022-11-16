@@ -1,0 +1,26 @@
+plugins {
+    id 'org.jetbrains.kotlin.plugin.spring'
+    id 'org.springframework.boot'
+    id "com.gorylenko.gradle-git-properties" version "2.4.0" // for information about commit in actuator
+}
+
+dependencies {
+    annotationProcessor "org.springframework.boot:spring-boot-configuration-processor"
+    implementation("org.springframework.boot:spring-boot-starter-web")
+    implementation("org.springframework.boot:spring-boot-starter-actuator")
+
+    implementation 'net.logstash.logback:logstash-logback-encoder:7.2'
+    implementation "ch.qos.logback:logback-classic"
+
+}
+
+compileJava.inputs.files(processResources)
+
+bootJar {
+    launchScript()
+    archiveFileName = 'patient-portal.jar'
+}
+
+springBoot {
+    buildInfo()
+}
