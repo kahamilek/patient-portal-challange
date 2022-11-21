@@ -1,4 +1,4 @@
-package pl.hanusek.patient.portal
+package pl.hanusek.patient.service
 
 import org.springframework.boot.SpringApplication
 import org.springframework.boot.autoconfigure.SpringBootApplication
