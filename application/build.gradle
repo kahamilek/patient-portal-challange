@@ -18,7 +18,7 @@ compileJava.inputs.files(processResources)
 
 bootJar {
     launchScript()
-    archiveFileName = 'patient-portal.jar'
+    archiveFileName = 'patient-service.jar'
 }
 
 springBoot {
