@@ -1,3 +1,4 @@
 rootProject.name = 'patient-service'
 
 include 'application'
+include 'shared'
