@@ -3,8 +3,8 @@ Content-Type: application/json
 
 {
     "fullName": {
-        "firstName": "Kamil",
-        "lastName": "Hanusek"
+        "firstName": "John",
+        "lastName": "Smith"
     },
     "address": {
         "city": "Poznań",
@@ -13,5 +13,5 @@ Content-Type: application/json
         "buildingNumber": "3",
         "apartmentNumber": null
     },
-    "organizationName": "RSQ"
+    "organizationName": "Example"
 }
