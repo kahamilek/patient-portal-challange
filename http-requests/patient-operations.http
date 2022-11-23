@@ -1,0 +1,17 @@
+POST http://localhost:10000/api/v1/patients
+Content-Type: application/json
+
+{
+    "fullName": {
+        "firstName": "Kamil",
+        "lastName": "Hanusek"
+    },
+    "address": {
+        "city": "Poznań",
+        "postcode": "61-222",
+        "street": "Głogowska",
+        "buildingNumber": "3",
+        "apartmentNumber": null
+    },
+    "organizationName": "RSQ"
+}
