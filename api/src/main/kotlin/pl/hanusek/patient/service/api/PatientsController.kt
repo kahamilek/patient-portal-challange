@@ -12,7 +12,7 @@ import pl.hanusek.patient.service.domain.patient.Patient
 import pl.hanusek.patient.service.domain.patient.PatientsFacade
 
 @RestController
-class PatientController(
+class PatientsController(
     private val patientsFacade: PatientsFacade
 ) {
 
