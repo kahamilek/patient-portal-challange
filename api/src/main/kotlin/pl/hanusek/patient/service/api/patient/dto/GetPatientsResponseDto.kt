@@ -8,7 +8,7 @@ import com.fasterxml.jackson.annotation.JsonTypeName
     include = JsonTypeInfo.As.PROPERTY,
     property = "state"
 )
-sealed class GetPatientsDtoResponse {
+sealed class GetPatientsResponseDto {
 
     @JsonTypeName("SUCCESS")
     data class Success(
@@ -16,7 +16,7 @@ sealed class GetPatientsDtoResponse {
         val pageNumber: Int,
         val pageSize: Int,
         val totalNumberOfPages: Int
-    ) : GetPatientsDtoResponse()
+    ) : GetPatientsResponseDto()
 
     data class Patient(
         val fullName: CreatePatientRequestDto.FullName,
@@ -27,5 +27,5 @@ sealed class GetPatientsDtoResponse {
     @JsonTypeName("ERROR")
     data class Error(
         val localizedMessage: String
-    ) : GetPatientsDtoResponse()
+    ) : GetPatientsResponseDto()
 }

@@ -51,6 +51,15 @@ internal class PatientsFacadeImpl(
         }
             .toDomainModel()
     }
+
+    override fun removePatient(patientId: Patient.PatientId) {
+        val patientToRemove = patientsRepository.findById( patientId )
+        return if(patientToRemove == null) {
+            throw PatientNotFoundException(patientId)
+        } else {
+            patientsRepository.delete(patientToRemove)
+        }
+    }
 }
 
 private fun <T> Page<T>.toDomainModel(): SinglePage<T> {

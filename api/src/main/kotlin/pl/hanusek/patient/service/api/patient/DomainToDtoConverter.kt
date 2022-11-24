@@ -2,14 +2,14 @@ package pl.hanusek.patient.service.api.patient
 
 import org.springframework.http.ResponseEntity
 import pl.hanusek.patient.service.api.patient.dto.CreatePatientRequestDto
-import pl.hanusek.patient.service.api.patient.dto.GetPatientsDtoResponse
+import pl.hanusek.patient.service.api.patient.dto.GetPatientsResponseDto
 import pl.hanusek.patient.service.domain.SinglePage
 import pl.hanusek.patient.service.domain.patient.Patient
 import pl.hanusek.patient.service.domain.patient.PatientsFacade
 
-internal fun SinglePage<PatientsFacade.PatientWithOrganizationName>.toDtoModel(): ResponseEntity<GetPatientsDtoResponse> {
+internal fun SinglePage<PatientsFacade.PatientWithOrganizationName>.toDtoModel(): ResponseEntity<GetPatientsResponseDto> {
     return ResponseEntity.ok(
-        GetPatientsDtoResponse.Success(
+        GetPatientsResponseDto.Success(
             patients = elementsOnCurrentPage.map { it.toDtoModel() },
             pageNumber = pageNumber,
             pageSize = pageSize,
@@ -18,8 +18,8 @@ internal fun SinglePage<PatientsFacade.PatientWithOrganizationName>.toDtoModel()
     )
 }
 
-private fun PatientsFacade.PatientWithOrganizationName.toDtoModel(): GetPatientsDtoResponse.Patient {
-    return GetPatientsDtoResponse.Patient(
+private fun PatientsFacade.PatientWithOrganizationName.toDtoModel(): GetPatientsResponseDto.Patient {
+    return GetPatientsResponseDto.Patient(
         fullName = patient.fullName.toDtoModel(),
         address = patient.address.toDtoModel(),
         organizationName = organizationName.formattedName,

@@ -69,13 +69,23 @@ class PatientsController(
         @RequestParam("page_number", required = false, defaultValue = "0") pageNumber: Int,
         @RequestParam("page_size", required = false, defaultValue = "20") pageSize: Int,
         @RequestParam("order_type", required = false, defaultValue = DEFAULT_ORDER_TYPE_TEXT) orderTypeText: String
-    ): ResponseEntity<GetPatientsDtoResponse> = kotlin.runCatching {
+    ): ResponseEntity<GetPatientsResponseDto> = kotlin.runCatching {
         patientsFacade.getPatients(pageNumber, pageSize, from(orderTypeText))
             .toDtoModel()
     }.getOrElse {
         logger.error(it) { "Unexpected error occurred" }
         ResponseEntity.internalServerError()
-            .body(GetPatientsDtoResponse.Error(UNEXPECTED_ERROR_MESSAGE))
+            .body(GetPatientsResponseDto.Error(UNEXPECTED_ERROR_MESSAGE))
+    }
+
+    @DeleteMapping("/api/v1/patients/{patientId}")
+    fun removePatient(@PathVariable patientId: String): ResponseEntity<out RemovePatientResponseDto> = kotlin.runCatching {
+        patientsFacade.removePatient(Patient.PatientId.from(patientId))
+        ResponseEntity.ok(RemovePatientResponseDto.Success())
+    }.getOrElse {
+        logger.error(it) { "Unexpected error occurred" }
+        ResponseEntity.internalServerError()
+            .body(RemovePatientResponseDto.Error(UNEXPECTED_ERROR_MESSAGE))
     }
 
 }

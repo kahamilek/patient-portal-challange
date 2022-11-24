@@ -37,3 +37,6 @@ Content-Type: application/json
         "apartmentNumber": null
     }
 }
+
+###
+DELETE http://localhost:10000/api/v1/patients/526d0e42-6f93-4815-9ba0-c2f7fbc5bd53

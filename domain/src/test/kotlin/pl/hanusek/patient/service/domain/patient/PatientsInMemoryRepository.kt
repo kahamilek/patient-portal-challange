@@ -37,6 +37,10 @@ class PatientsInMemoryRepository : PatientsRepository {
         )
     }
 
+    override fun delete(patientToRemove: Patient) {
+        patientByPatientId.remove(patientToRemove.id)
+    }
+
 }
 
 

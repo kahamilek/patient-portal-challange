@@ -35,6 +35,10 @@ internal class PatientsDbRepository(
         )
     }
 
+    override fun delete(patientToRemove: Patient) {
+        patientJpaRepository.delete(patientToRemove)
+    }
+
 }
 
 

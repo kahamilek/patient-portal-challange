@@ -1,6 +1,5 @@
 package pl.hanusek.patient.service.domain.patient
 
-import org.springframework.data.domain.Page
 import pl.hanusek.patient.service.domain.SinglePage
 import pl.hanusek.patient.service.domain.organization.Organization
 
@@ -16,6 +15,9 @@ interface PatientsFacade {
     fun updatePatient(patientId: Patient.PatientId, patientWithNewData: PatientToUpdate)
 
     fun getPatients(pageNumber: Int, pageSize: Int, orderType: OrderType): SinglePage<PatientWithOrganizationName>
+
+    @Throws(PatientNotFoundException::class)
+    fun removePatient(patientId: Patient.PatientId)
 
 
     enum class OrderType {

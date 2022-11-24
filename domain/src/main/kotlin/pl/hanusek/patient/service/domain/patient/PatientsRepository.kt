@@ -11,4 +11,5 @@ interface PatientsRepository {
     fun updatePatient(patient: Patient): Patient
 
     fun getPatientsOnPage(pageNumber: Int, pageSize: Int, orderType: PatientsFacade.OrderType): Page<Patient>
+    fun delete(patientToRemove: Patient)
 }
