@@ -4,14 +4,13 @@ import mu.KotlinLogging
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
-import pl.hanusek.patient.service.api.patient.dto.CreatePatientRequestDto
-import pl.hanusek.patient.service.api.patient.dto.CreatePatientResponseDto
-import pl.hanusek.patient.service.api.patient.dto.UpdatePatientRequestDto
-import pl.hanusek.patient.service.api.patient.dto.UpdatePatientResponseDto
+import pl.hanusek.patient.service.api.patient.dto.*
 import pl.hanusek.patient.service.domain.patient.Patient
 import pl.hanusek.patient.service.domain.patient.PatientInvalidArgumentException
 import pl.hanusek.patient.service.domain.patient.PatientNotFoundException
 import pl.hanusek.patient.service.domain.patient.PatientsFacade
+import pl.hanusek.patient.service.domain.patient.PatientsFacade.OrderType.Companion.DEFAULT_ORDER_TYPE_TEXT
+import pl.hanusek.patient.service.domain.patient.PatientsFacade.OrderType.Companion.from
 
 @RestController
 class PatientsController(
@@ -35,7 +34,7 @@ class PatientsController(
             } else {
                 logger.error(it) { "Error occurred while adding new patient" }
                 ResponseEntity.internalServerError()
-                    .body(CreatePatientResponseDto.Error("Unexpected error occurred on server side. Please try later."))
+                    .body(CreatePatientResponseDto.Error(UNEXPECTED_ERROR_MESSAGE))
             }
         }
 
@@ -60,12 +59,28 @@ class PatientsController(
             else -> {
                 logger.error(it) { "Error occurred while updating patient with id $patientId" }
                 ResponseEntity.internalServerError()
-                    .body(UpdatePatientResponseDto.Error("Unexpected error occurred on server side. Please try later."))
+                    .body(UpdatePatientResponseDto.Error(UNEXPECTED_ERROR_MESSAGE))
             }
         }
     }
 
+    @GetMapping("/api/v1/patients")
+    fun getPatients(
+        @RequestParam("page_number", required = false, defaultValue = "0") pageNumber: Int,
+        @RequestParam("page_size", required = false, defaultValue = "20") pageSize: Int,
+        @RequestParam("order_type", required = false, defaultValue = DEFAULT_ORDER_TYPE_TEXT) orderTypeText: String
+    ): ResponseEntity<GetPatientsDtoResponse> = kotlin.runCatching {
+        patientsFacade.getPatients(pageNumber, pageSize, from(orderTypeText))
+            .toDtoModel()
+    }.getOrElse {
+        logger.error(it) { "Unexpected error occurred" }
+        ResponseEntity.internalServerError()
+            .body(GetPatientsDtoResponse.Error(UNEXPECTED_ERROR_MESSAGE))
+    }
+
 }
+
+private const val UNEXPECTED_ERROR_MESSAGE = "Unexpected error occurred on server side. Please try later."
 
 private val logger = KotlinLogging.logger { }
 

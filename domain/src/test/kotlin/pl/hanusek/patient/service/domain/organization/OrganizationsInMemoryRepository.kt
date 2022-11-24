@@ -10,4 +10,9 @@ class OrganizationsInMemoryRepository : OrganizationsRepository {
         return organizationByOrganizationName.putIfAbsent(organizationName, Organization(organizationName))
             ?: organizationByOrganizationName.getValue(organizationName)
     }
+
+    override fun findById(value: String): Organization? {
+        return organizationByOrganizationName.values
+            .firstOrNull { it.id.value == value }
+    }
 }

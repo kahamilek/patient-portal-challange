@@ -1,6 +1,8 @@
 package pl.hanusek.patient.service.domain.patient
 
 import org.springframework.data.domain.Page
+import org.springframework.data.domain.PageImpl
+import org.springframework.data.domain.PageRequest
 import java.util.concurrent.ConcurrentHashMap
 
 class PatientsInMemoryRepository : PatientsRepository {
@@ -20,8 +22,31 @@ class PatientsInMemoryRepository : PatientsRepository {
         return patient
     }
 
-    override fun getPatientsOnPage(pageNumber: Int): Page<Patient> {
-        TODO("Not yet implemented")
+    override fun getPatientsOnPage(
+        pageNumber: Int,
+        pageSize: Int,
+        orderType: PatientsFacade.OrderType
+    ): Page<Patient> {
+        val allElementsSorted = patientByPatientId.values.sorted(orderType)
+
+        return pageOf(
+            allElementsSorted.drop(pageNumber * pageSize)
+                .take(pageSize),
+            pageNumber,
+            pageSize
+        )
     }
 
+}
+
+
+private fun pageOf(elements: List<Patient>, pageNumber: Int, pageSize: Int): Page<Patient> {
+    return PageImpl(elements, PageRequest.of(pageNumber, pageSize), elements.size.toLong())
+}
+
+private fun MutableCollection<Patient>.sorted(orderType: PatientsFacade.OrderType): List<Patient> {
+    return when (orderType) {
+        PatientsFacade.OrderType.ASC -> this.sortedBy { it.creationTimestamp }
+        PatientsFacade.OrderType.DESC -> this.sortedByDescending { it.creationTimestamp }
+    }
 }

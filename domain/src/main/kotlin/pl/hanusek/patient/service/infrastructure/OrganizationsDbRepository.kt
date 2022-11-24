@@ -19,6 +19,11 @@ internal class OrganizationsDbRepository(
         )
     }
 
+    override fun findById(id: String): Organization? {
+        return organizationsJpaRepository.findById(id)
+            .orElse(null)
+    }
+
 
 }
 

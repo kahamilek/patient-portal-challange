@@ -1,6 +1,7 @@
 package pl.hanusek.patient.service.domain.patient
 
 import pl.hanusek.patient.service.domain.organization.Organization
+import java.time.Instant
 import java.util.*
 import javax.persistence.Convert
 import javax.persistence.Entity
@@ -16,6 +17,7 @@ data class Patient private constructor(
     val fullName: FullName,
     @Convert(converter = AddressAttributeConverter::class)
     val address: Address,
+    val creationTimestamp: Instant,
     val organizationId: Organization.OrganizationId
 ) {
     constructor(
@@ -26,7 +28,8 @@ data class Patient private constructor(
         id = PatientId(UUID.randomUUID().toString()),
         fullName = fullName,
         address = address,
-        organizationId = organizationId
+        organizationId = organizationId,
+        creationTimestamp = Instant.now()
     )
 
     fun update(patientWithNewData: PatientsFacade.PatientToUpdate): Patient {

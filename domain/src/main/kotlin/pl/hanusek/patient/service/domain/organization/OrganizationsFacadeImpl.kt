@@ -10,4 +10,10 @@ class OrganizationsFacadeImpl(
     override fun getOrCreateOrganizationIfNotExists(organizationName: Organization.OrganizationName): Organization {
         return organizationsRepository.getOrCreateIfNotExists(organizationName)
     }
+
+    override fun getOrganizationNameById(organizationId: Organization.OrganizationId): Organization.OrganizationName {
+        return organizationsRepository.findById(organizationId.value)!!
+            .name
+
+    }
 }
