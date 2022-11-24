@@ -11,24 +11,14 @@ Content-Type: application/json
 
 ###
 
-GET http://localhost:10000/api/v1/doctors-appointment
+GET http://localhost:10000/api/v1/doctors-appointment?patientId=182fb7cf-5032-4b37-a4c3-e8cda550b9b0
 
 ###
-PUT http://localhost:10000/api/v1/doctors-appointment/c537f685-6af4-4ed8-89fd-6eb53e44bcac
+PUT http://localhost:10000/api/v1/doctors-appointment/98dc5e49-4c18-443f-90a3-3350346f4478
 Content-Type: application/json
 
 {
-    "fullName": {
-        "firstName": "Not John",
-        "lastName": "Smith"
-    },
-    "address": {
-        "city": "Warszawa",
-        "postcode": "00-000",
-        "street": "Głogowska",
-        "buildingNumber": "44",
-        "apartmentNumber": null
-    }
+    "newTime": "15:00:00"
 }
 
 ###
