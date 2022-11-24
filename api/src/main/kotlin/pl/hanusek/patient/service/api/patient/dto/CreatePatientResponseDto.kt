@@ -1,4 +1,4 @@
-package pl.hanusek.patient.service.api.dto
+package pl.hanusek.patient.service.api.patient.dto
 
 import com.fasterxml.jackson.annotation.JsonTypeInfo
 import com.fasterxml.jackson.annotation.JsonTypeName
@@ -8,13 +8,15 @@ import com.fasterxml.jackson.annotation.JsonTypeName
     include = JsonTypeInfo.As.PROPERTY,
     property = "type"
 )
-sealed class UpdatePatientResponseDto {
+sealed class CreatePatientResponseDto {
 
     @JsonTypeName("SUCCESS")
-    class Success : UpdatePatientResponseDto()
+    data class Success(
+        val patientId: String
+    ): CreatePatientResponseDto()
 
     @JsonTypeName("ERROR")
     data class Error(
         val localizedMessage: String
-    ) : UpdatePatientResponseDto()
+    ): CreatePatientResponseDto()
 }

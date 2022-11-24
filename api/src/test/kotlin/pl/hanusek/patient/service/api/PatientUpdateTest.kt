@@ -6,8 +6,8 @@ import io.kotest.matchers.shouldBe
 import io.kotest.matchers.string.shouldContain
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
-import pl.hanusek.patient.service.api.dto.CreatePatientResponseDto
-import pl.hanusek.patient.service.api.dto.UpdatePatientResponseDto
+import pl.hanusek.patient.service.api.patient.dto.CreatePatientResponseDto
+import pl.hanusek.patient.service.api.patient.dto.UpdatePatientResponseDto
 import pl.hanusek.patient.service.api.fixtures.*
 import pl.hanusek.patient.service.api.fixtures.INVALID_PATIENT_ID
 import pl.hanusek.patient.service.api.fixtures.PATIENT_UPDATE_MODEL_WITH_BLANK_FIRST_NAME

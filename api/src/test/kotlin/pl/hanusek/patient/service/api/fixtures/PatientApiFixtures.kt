@@ -1,7 +1,7 @@
 package pl.hanusek.patient.service.api.fixtures
 
-import pl.hanusek.patient.service.api.dto.CreatePatientRequestDto
-import pl.hanusek.patient.service.api.dto.UpdatePatientRequestDto
+import pl.hanusek.patient.service.api.patient.dto.CreatePatientRequestDto
+import pl.hanusek.patient.service.api.patient.dto.UpdatePatientRequestDto
 
 internal val VALID_PATIENT_CREATION_MODEL = CreatePatientRequestDto(
     fullName = CreatePatientRequestDto.FullName(

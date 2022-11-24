@@ -5,7 +5,7 @@ import io.kotest.matchers.nulls.shouldNotBeNull
 import io.kotest.matchers.shouldBe
 import io.kotest.matchers.string.shouldContain
 import org.springframework.http.HttpStatus
-import pl.hanusek.patient.service.api.dto.CreatePatientResponseDto
+import pl.hanusek.patient.service.api.patient.dto.CreatePatientResponseDto
 import pl.hanusek.patient.service.api.fixtures.PATIENT_CREATION_MODEL_WITH_BLANK_FIRST_NAME
 import pl.hanusek.patient.service.api.fixtures.PATIENT_CREATION_MODEL_WITH_BLANK_LAST_NAME
 import pl.hanusek.patient.service.api.fixtures.VALID_PATIENT_CREATION_MODEL

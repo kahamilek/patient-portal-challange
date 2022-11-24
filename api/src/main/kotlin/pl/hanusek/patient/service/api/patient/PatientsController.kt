@@ -1,13 +1,13 @@
-package pl.hanusek.patient.service.api
+package pl.hanusek.patient.service.api.patient
 
 import mu.KotlinLogging
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
-import pl.hanusek.patient.service.api.dto.CreatePatientRequestDto
-import pl.hanusek.patient.service.api.dto.CreatePatientResponseDto
-import pl.hanusek.patient.service.api.dto.UpdatePatientRequestDto
-import pl.hanusek.patient.service.api.dto.UpdatePatientResponseDto
+import pl.hanusek.patient.service.api.patient.dto.CreatePatientRequestDto
+import pl.hanusek.patient.service.api.patient.dto.CreatePatientResponseDto
+import pl.hanusek.patient.service.api.patient.dto.UpdatePatientRequestDto
+import pl.hanusek.patient.service.api.patient.dto.UpdatePatientResponseDto
 import pl.hanusek.patient.service.domain.patient.Patient
 import pl.hanusek.patient.service.domain.patient.PatientInvalidArgumentException
 import pl.hanusek.patient.service.domain.patient.PatientNotFoundException

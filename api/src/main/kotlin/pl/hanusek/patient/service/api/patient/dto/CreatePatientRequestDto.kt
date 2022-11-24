@@ -1,4 +1,4 @@
-package pl.hanusek.patient.service.api.dto
+package pl.hanusek.patient.service.api.patient.dto
 
 data class CreatePatientRequestDto(
     val fullName: FullName,
