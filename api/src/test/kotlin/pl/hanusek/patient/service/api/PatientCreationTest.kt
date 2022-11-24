@@ -8,10 +8,10 @@ import pl.hanusek.patient.service.api.dto.CreatePatientRequestDto
 import pl.hanusek.patient.service.api.dto.CreatePatientResponseDto
 
 class PatientCreationTest : BehaviorSpec({
-    given("Initialized empty context") {
-        val context = initializedEmptyContext()
+    given("Initialized patient API context") {
+        val patientContext = initializedEmptyPatientApiContext()
         When("Creating patient with valid model") {
-            val patientCreationResult = context.createPatient(VALID_PATIENT_MODEL)
+            val patientCreationResult = patientContext.createPatient(VALID_PATIENT_MODEL)
             Then("Result is success with patient id") {
                 patientCreationResult.statusCode shouldBe HttpStatus.OK
                 (patientCreationResult.body as CreatePatientResponseDto.Success?)
@@ -25,7 +25,7 @@ class PatientCreationTest : BehaviorSpec({
 }
 )
 
-fun initializedEmptyContext(): PatientApiTestContext {
+fun initializedEmptyPatientApiContext(): PatientApiTestContext {
     return PatientApiTestContext()
 }
 
