@@ -1,0 +1,30 @@
+POST http://localhost:10000/api/v1/doctors
+Content-Type: application/json
+
+{
+    "fullName": {
+        "firstName": "John",
+        "lastName": "Smith"
+    },
+    "specializationName": "DENTIST",
+    "organizationName": "Example55"
+}
+
+###
+
+GET http://localhost:10000/api/v1/doctors?page_number=0
+
+###
+PUT http://localhost:10000/api/v1/doctors/b5f82f68-589f-4fa8-b61e-8c06be3f1b96
+Content-Type: application/json
+
+{
+    "fullName": {
+        "firstName": "Not John",
+        "lastName": "Smith"
+    },
+    "specializationName": "PHYSIOTHERAPIST"
+}
+
+###
+DELETE http://localhost:10000/api/v1/doctors/b5f82f68-589f-4fa8-b61e-8c06be3f1b96

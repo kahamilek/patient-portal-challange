@@ -2,7 +2,9 @@ package pl.hanusek.patient.service.api.patient
 
 import org.springframework.http.ResponseEntity
 import pl.hanusek.patient.service.api.patient.dto.CreatePatientRequestDto
+import pl.hanusek.patient.service.api.patient.dto.CreatePatientResponseDto
 import pl.hanusek.patient.service.api.patient.dto.GetPatientsResponseDto
+import pl.hanusek.patient.service.domain.FullName
 import pl.hanusek.patient.service.domain.SinglePage
 import pl.hanusek.patient.service.domain.patient.Patient
 import pl.hanusek.patient.service.domain.patient.PatientsFacade
@@ -37,9 +39,13 @@ private fun Patient.Address.toDtoModel(): CreatePatientRequestDto.Address {
     )
 }
 
-private fun Patient.FullName.toDtoModel(): CreatePatientRequestDto.FullName {
+private fun FullName.toDtoModel(): CreatePatientRequestDto.FullName {
     return CreatePatientRequestDto.FullName(
         firstName = firstName,
         lastName = lastName,
     )
+}
+
+internal fun Patient.toDtoModel(): CreatePatientResponseDto {
+    return CreatePatientResponseDto.Success(this.id.value)
 }

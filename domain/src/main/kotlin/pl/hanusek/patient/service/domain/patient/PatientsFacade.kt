@@ -1,12 +1,13 @@
 package pl.hanusek.patient.service.domain.patient
 
+import pl.hanusek.patient.service.domain.FullName
 import pl.hanusek.patient.service.domain.SinglePage
 import pl.hanusek.patient.service.domain.organization.Organization
 
 interface PatientsFacade {
 
     fun createPatient(
-        patientFullName: Patient.FullName,
+        patientFullName: FullName,
         patientAddress: Patient.Address,
         organizationName: Organization.OrganizationName
     ): Patient
@@ -37,7 +38,7 @@ interface PatientsFacade {
 
 
     data class PatientToUpdate(
-        val fullName: Patient.FullName,
+        val fullName: FullName,
         val address: Patient.Address,
     )
 

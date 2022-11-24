@@ -1,8 +1,8 @@
 package pl.hanusek.patient.service.api.patient
 
 import pl.hanusek.patient.service.api.patient.dto.CreatePatientRequestDto
-import pl.hanusek.patient.service.api.patient.dto.CreatePatientResponseDto
 import pl.hanusek.patient.service.api.patient.dto.UpdatePatientRequestDto
+import pl.hanusek.patient.service.domain.FullName
 import pl.hanusek.patient.service.domain.organization.Organization
 import pl.hanusek.patient.service.domain.patient.Patient
 import pl.hanusek.patient.service.domain.patient.PatientsFacade
@@ -18,10 +18,6 @@ internal fun String.toDomain(): Organization.OrganizationName {
     return Organization.OrganizationName.from(this)
 }
 
-internal fun Patient.toDtoModel(): CreatePatientResponseDto {
-    return CreatePatientResponseDto.Success(this.id.value)
-}
-
 internal fun CreatePatientRequestDto.Address.toDomain(): Patient.Address {
     return Patient.Address(
         city = city,
@@ -32,8 +28,8 @@ internal fun CreatePatientRequestDto.Address.toDomain(): Patient.Address {
     )
 }
 
-internal fun CreatePatientRequestDto.FullName.toDomain(): Patient.FullName {
-    return Patient.FullName(
+internal fun CreatePatientRequestDto.FullName.toDomain(): FullName {
+    return FullName(
         firstName = firstName,
         lastName = lastName,
     )
