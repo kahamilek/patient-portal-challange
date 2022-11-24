@@ -8,7 +8,6 @@ import pl.hanusek.patient.service.api.dto.CreatePatientRequestDto
 import pl.hanusek.patient.service.api.dto.CreatePatientResponseDto
 import pl.hanusek.patient.service.api.dto.UpdatePatientRequestDto
 import pl.hanusek.patient.service.api.dto.UpdatePatientResponseDto
-import pl.hanusek.patient.service.domain.organization.Organization
 import pl.hanusek.patient.service.domain.patient.Patient
 import pl.hanusek.patient.service.domain.patient.PatientInvalidArgumentException
 import pl.hanusek.patient.service.domain.patient.PatientNotFoundException
@@ -68,43 +67,11 @@ class PatientsController(
 
 }
 
-private fun UpdatePatientRequestDto.toDomainModel(): PatientsFacade.PatientToUpdate {
-    return PatientsFacade.PatientToUpdate(
-        fullName = fullName.toDomain(),
-        address = address.toDomain(),
-    )
-}
+private val logger = KotlinLogging.logger { }
 
 private fun localizedErrorMessage(errorType: PatientInvalidArgumentException.ErrorType): String {
     return when (errorType) {
         PatientInvalidArgumentException.ErrorType.FIRST_NAME_IS_BLANK -> "Missing first name"
         PatientInvalidArgumentException.ErrorType.LAST_NAME_IS_BLANK -> "Missing last name"
     }
-}
-
-private val logger = KotlinLogging.logger { }
-
-private fun String.toDomain(): Organization.OrganizationName {
-    return Organization.OrganizationName.from(this)
-}
-
-private fun Patient.toDtoModel(): CreatePatientResponseDto {
-    return CreatePatientResponseDto.Success(this.id.value)
-}
-
-private fun CreatePatientRequestDto.Address.toDomain(): Patient.Address {
-    return Patient.Address(
-        city = city,
-        postcode = postcode,
-        street = street,
-        buildingNumber = buildingNumber,
-        apartmentNumber = apartmentNumber,
-    )
-}
-
-private fun CreatePatientRequestDto.FullName.toDomain(): Patient.FullName {
-    return Patient.FullName(
-        firstName = firstName,
-        lastName = lastName,
-    )
 }
