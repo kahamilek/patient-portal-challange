@@ -1,0 +1,10 @@
+plugins {
+    id 'org.jetbrains.kotlin.plugin.spring'
+}
+
+dependencies {
+    implementation project(":domain")
+    implementation("org.springframework.boot:spring-boot-starter-web")
+
+    testImplementation project(':domain').sourceSets.test.output
+}

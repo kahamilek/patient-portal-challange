@@ -1,3 +1,6 @@
 rootProject.name = 'patient-service'
 
 include 'application'
+include 'shared'
+include 'domain'
+include 'api'
