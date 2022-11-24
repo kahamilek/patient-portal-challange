@@ -1,8 +1,8 @@
 package pl.hanusek.patient.service.domain.patient
 
-class PatientCreationException(
+class PatientInvalidArgumentException(
     val errorType: ErrorType
-) : IllegalArgumentException("Cannot create patient, cause: ${errorType}") {
+) : IllegalArgumentException("Cannot create patient, cause: $errorType") {
 
     enum class ErrorType {
         FIRST_NAME_IS_BLANK,

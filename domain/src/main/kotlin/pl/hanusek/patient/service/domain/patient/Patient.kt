@@ -18,7 +18,6 @@ data class Patient private constructor(
     val address: Address,
     val organizationId: Organization.OrganizationId
 ) {
-
     constructor(
         fullName: FullName,
         address: Address,
@@ -30,10 +29,23 @@ data class Patient private constructor(
         organizationId = organizationId
     )
 
+    fun update(patientWithNewData: PatientsFacade.PatientToUpdate): Patient {
+        return this.copy(
+            fullName = patientWithNewData.fullName,
+            address = patientWithNewData.address
+        )
+    }
+
     @JvmInline
     value class PatientId(
         val value: String
-    )
+    ) {
+        companion object {
+            fun from(patientId: String): PatientId {
+                return PatientId(patientId)
+            }
+        }
+    }
 
     data class FullName(
         val firstName: String,
@@ -41,10 +53,10 @@ data class Patient private constructor(
     ) {
         init {
             if (firstName.isBlank()) {
-                throw PatientCreationException(PatientCreationException.ErrorType.FIRST_NAME_IS_BLANK)
+                throw PatientInvalidArgumentException(PatientInvalidArgumentException.ErrorType.FIRST_NAME_IS_BLANK)
             }
             if (lastName.isBlank()) {
-                throw PatientCreationException(PatientCreationException.ErrorType.LAST_NAME_IS_BLANK)
+                throw PatientInvalidArgumentException(PatientInvalidArgumentException.ErrorType.LAST_NAME_IS_BLANK)
             }
         }
     }

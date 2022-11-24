@@ -27,4 +27,10 @@ internal class PatientsFacadeImpl(
             )
         )
     }
+
+    override fun updatePatient(patientId: Patient.PatientId, patientWithNewData: PatientsFacade.PatientToUpdate) {
+        val patientToUpdate = patientsRepository.findById(patientId) ?: throw PatientNotFoundException(patientId)
+        val updatedPatient = patientToUpdate.update(patientWithNewData)
+        patientsRepository.updatePatient(updatedPatient)
+    }
 }

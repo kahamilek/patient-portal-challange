@@ -9,4 +9,12 @@ interface PatientsFacade {
         patientAddress: Patient.Address,
         organizationName: Organization.OrganizationName
     ): Patient
+
+    @Throws(PatientNotFoundException::class)
+    fun updatePatient(patientId: Patient.PatientId, patientWithNewData: PatientToUpdate)
+
+    data class PatientToUpdate(
+        val fullName: Patient.FullName,
+        val address: Patient.Address,
+    )
 }
