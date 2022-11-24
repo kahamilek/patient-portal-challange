@@ -9,6 +9,7 @@ import pl.hanusek.patient.service.api.dto.CreatePatientRequestDto
 import pl.hanusek.patient.service.api.dto.CreatePatientResponseDto
 import pl.hanusek.patient.service.domain.organization.Organization
 import pl.hanusek.patient.service.domain.patient.Patient
+import pl.hanusek.patient.service.domain.patient.PatientCreationException
 import pl.hanusek.patient.service.domain.patient.PatientsFacade
 
 @RestController
@@ -27,10 +28,23 @@ class PatientsController(
             )
             ResponseEntity.ok(patient.toDtoModel())
         }.getOrElse {
-            logger.error (it){ "Error occurred while adding new patient" }
-            ResponseEntity.internalServerError()
-                .body(CreatePatientResponseDto.Error("Unexpected error occurred on server side. Please try later."))
+            if (it is PatientCreationException) {
+                ResponseEntity.badRequest()
+                    .body(CreatePatientResponseDto.Error(localizedErrorMessage(it.errorType)))
+            } else {
+                logger.error(it) { "Error occurred while adding new patient" }
+                ResponseEntity.internalServerError()
+                    .body(CreatePatientResponseDto.Error("Unexpected error occurred on server side. Please try later."))
+            }
         }
+
+}
+
+private fun localizedErrorMessage(errorType: PatientCreationException.ErrorType): String {
+    return when (errorType) {
+        PatientCreationException.ErrorType.FIRST_NAME_IS_BLANK -> "Missing first name"
+        PatientCreationException.ErrorType.LAST_NAME_IS_BLANK -> "Missing last name"
+    }
 }
 
 private val logger = KotlinLogging.logger { }

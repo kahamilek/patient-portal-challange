@@ -38,7 +38,16 @@ data class Patient private constructor(
     data class FullName(
         val firstName: String,
         val lastName: String
-    )
+    ) {
+        init {
+            if (firstName.isBlank()) {
+                throw PatientCreationException(PatientCreationException.ErrorType.FIRST_NAME_IS_BLANK)
+            }
+            if (lastName.isBlank()) {
+                throw PatientCreationException(PatientCreationException.ErrorType.LAST_NAME_IS_BLANK)
+            }
+        }
+    }
 
     data class Address(
         val city: String,
