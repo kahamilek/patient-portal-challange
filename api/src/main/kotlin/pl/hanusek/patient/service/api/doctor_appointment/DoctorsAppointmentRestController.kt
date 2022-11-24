@@ -58,7 +58,7 @@ class DoctorsAppointmentRestController(
 
     @GetMapping("/api/v1/doctors-appointment")
     fun getDoctorsAppointments(
-        @RequestParam patientId: String?,
+        @RequestParam("patient_id") patientId: String?,
         @RequestParam("page_number", required = false, defaultValue = "0") pageNumber: Int,
         @RequestParam("page_size", required = false, defaultValue = "20") pageSize: Int,
         @RequestParam("order_type", required = false, defaultValue = OrderType.DEFAULT_ORDER_TYPE_TEXT) orderTypeText: String
