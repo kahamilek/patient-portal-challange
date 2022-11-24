@@ -78,7 +78,7 @@ private val logger = KotlinLogging.logger { }
 
 private fun  SinglePage<DoctorsAppointmentsFacade.EnrichedDoctorsAppointment>.toDomainModel(): GetDoctorsAppointmentsResponseDto.Success {
     return GetDoctorsAppointmentsResponseDto.Success(
-        doctors = elementsOnCurrentPage.map { it.toDtoModel() },
+        doctorsAppointments = elementsOnCurrentPage.map { it.toDtoModel() },
         pageNumber = pageNumber,
         pageSize = pageSize,
         totalNumberOfPages = totalNumberOfPages
