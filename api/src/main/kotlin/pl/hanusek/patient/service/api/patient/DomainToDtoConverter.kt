@@ -23,6 +23,7 @@ private fun PatientsFacade.PatientWithOrganizationName.toDtoModel(): GetPatients
         fullName = patient.fullName.toDtoModel(),
         address = patient.address.toDtoModel(),
         organizationName = organizationName.formattedName,
+        id = patient.id.value
     )
 }
 

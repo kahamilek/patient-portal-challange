@@ -21,7 +21,8 @@ sealed class GetPatientsResponseDto {
     data class Patient(
         val fullName: CreatePatientRequestDto.FullName,
         val address: CreatePatientRequestDto.Address,
-        val organizationName: String
+        val organizationName: String,
+        val id: String
     )
 
     @JsonTypeName("ERROR")
