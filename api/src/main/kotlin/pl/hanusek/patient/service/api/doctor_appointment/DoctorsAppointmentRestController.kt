@@ -87,6 +87,7 @@ private fun  SinglePage<DoctorsAppointmentsFacade.EnrichedDoctorsAppointment>.to
 
 private fun DoctorsAppointmentsFacade.EnrichedDoctorsAppointment.toDtoModel(): DoctorsAppointmentDto {
     return DoctorsAppointmentDto(
+        id = this.doctorsAppointment.id.value,
         date = this.doctorsAppointment.date,
         time = doctorsAppointment.time,
         place = doctorsAppointment.place.value,
