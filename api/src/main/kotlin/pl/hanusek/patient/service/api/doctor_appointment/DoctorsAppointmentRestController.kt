@@ -58,7 +58,7 @@ class DoctorsAppointmentRestController(
 
     @GetMapping("/api/v1/doctors-appointment")
     fun getDoctorsAppointments(
-        @RequestParam patientId: String?,
+        @RequestParam("patient_id") patientId: String?,
         @RequestParam("page_number", required = false, defaultValue = "0") pageNumber: Int,
         @RequestParam("page_size", required = false, defaultValue = "20") pageSize: Int,
         @RequestParam("order_type", required = false, defaultValue = OrderType.DEFAULT_ORDER_TYPE_TEXT) orderTypeText: String
@@ -78,7 +78,7 @@ private val logger = KotlinLogging.logger { }
 
 private fun  SinglePage<DoctorsAppointmentsFacade.EnrichedDoctorsAppointment>.toDomainModel(): GetDoctorsAppointmentsResponseDto.Success {
     return GetDoctorsAppointmentsResponseDto.Success(
-        doctors = elementsOnCurrentPage.map { it.toDtoModel() },
+        doctorsAppointments = elementsOnCurrentPage.map { it.toDtoModel() },
         pageNumber = pageNumber,
         pageSize = pageSize,
         totalNumberOfPages = totalNumberOfPages

@@ -12,7 +12,7 @@ sealed class GetDoctorsAppointmentsResponseDto {
 
     @JsonTypeName("SUCCESS")
     data class Success(
-        val doctors: List<DoctorsAppointmentDto>,
+        val doctorsAppointments: List<DoctorsAppointmentDto>,
         val pageNumber: Int,
         val pageSize: Int,
         val totalNumberOfPages: Int
