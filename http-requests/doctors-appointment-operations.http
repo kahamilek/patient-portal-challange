@@ -1,0 +1,35 @@
+POST http://localhost:10000/api/v1/doctors-appointment
+Content-Type: application/json
+
+{
+    "date": "2022-01-01",
+    "time":  "22:04:00",
+    "place": "Example place 2",
+    "attendingPhysicianId": "ff4cfc87-6652-4d4b-88b2-1bd8f2434734",
+    "patientId": "ae736505-5277-45f8-8b2d-cd6c85ff615c"
+}
+
+###
+
+GET http://localhost:10000/api/v1/doctors-appointment
+
+###
+PUT http://localhost:10000/api/v1/doctors-appointment/c537f685-6af4-4ed8-89fd-6eb53e44bcac
+Content-Type: application/json
+
+{
+    "fullName": {
+        "firstName": "Not John",
+        "lastName": "Smith"
+    },
+    "address": {
+        "city": "Warszawa",
+        "postcode": "00-000",
+        "street": "Głogowska",
+        "buildingNumber": "44",
+        "apartmentNumber": null
+    }
+}
+
+###
+DELETE http://localhost:10000/api/v1/doctors-appointment/526d0e42-6f93-4815-9ba0-c2f7fbc5bd53

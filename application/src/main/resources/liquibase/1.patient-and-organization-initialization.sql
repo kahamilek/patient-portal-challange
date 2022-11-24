@@ -15,4 +15,4 @@ CREATE TABLE organization
     name TEXT NOT NULL
 );
 
-CREATE INDEX ON organization (name);
+CREATE UNIQUE INDEX INDEX ON organization (name);

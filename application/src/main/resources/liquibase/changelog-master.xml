@@ -7,4 +7,5 @@
     http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
     <include file="/liquibase/1.patient-and-organization-initialization.sql"/>
     <include file="/liquibase/2.doctor-entity-initialization.sql"/>
+    <include file="/liquibase/3.doctor-appointment-entity-initialization.sql"/>
 </databaseChangeLog>

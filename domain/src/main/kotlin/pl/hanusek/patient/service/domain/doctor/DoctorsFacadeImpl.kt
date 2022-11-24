@@ -63,4 +63,8 @@ internal class DoctorsFacadeImpl(
             doctorsRepository.delete(doctorToRemove)
         }
     }
+
+    override fun getDoctor(doctorId: Doctor.DoctorId): Doctor? {
+        return doctorsRepository.findById(doctorId)
+    }
 }

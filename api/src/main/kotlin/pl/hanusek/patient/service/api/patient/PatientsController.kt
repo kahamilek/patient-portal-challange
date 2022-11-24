@@ -5,12 +5,12 @@ import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 import pl.hanusek.patient.service.api.patient.dto.*
+import pl.hanusek.patient.service.domain.OrderType.Companion.DEFAULT_ORDER_TYPE_TEXT
+import pl.hanusek.patient.service.domain.OrderType.Companion.from
 import pl.hanusek.patient.service.domain.patient.Patient
 import pl.hanusek.patient.service.domain.patient.PatientInvalidArgumentException
 import pl.hanusek.patient.service.domain.patient.PatientNotFoundException
 import pl.hanusek.patient.service.domain.patient.PatientsFacade
-import pl.hanusek.patient.service.domain.patient.PatientsFacade.OrderType.Companion.DEFAULT_ORDER_TYPE_TEXT
-import pl.hanusek.patient.service.domain.patient.PatientsFacade.OrderType.Companion.from
 
 @RestController
 class PatientsController(
