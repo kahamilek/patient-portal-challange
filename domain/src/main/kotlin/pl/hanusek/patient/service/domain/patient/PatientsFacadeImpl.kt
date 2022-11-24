@@ -1,11 +1,12 @@
 package pl.hanusek.patient.service.domain.patient
 
-import org.springframework.data.domain.Page
 import org.springframework.stereotype.Component
 import org.springframework.transaction.annotation.Transactional
+import pl.hanusek.patient.service.domain.FullName
 import pl.hanusek.patient.service.domain.SinglePage
 import pl.hanusek.patient.service.domain.organization.Organization
 import pl.hanusek.patient.service.domain.organization.OrganizationsFacade
+import pl.hanusek.patient.service.domain.toDomainModel
 
 @Component
 internal class PatientsFacadeImpl(
@@ -15,7 +16,7 @@ internal class PatientsFacadeImpl(
 
     @Transactional
     override fun createPatient(
-        patientFullName: Patient.FullName,
+        patientFullName: FullName,
         patientAddress: Patient.Address,
         organizationName: Organization.OrganizationName
     ): Patient {
@@ -53,20 +54,11 @@ internal class PatientsFacadeImpl(
     }
 
     override fun removePatient(patientId: Patient.PatientId) {
-        val patientToRemove = patientsRepository.findById( patientId )
-        return if(patientToRemove == null) {
+        val patientToRemove = patientsRepository.findById(patientId)
+        return if (patientToRemove == null) {
             throw PatientNotFoundException(patientId)
         } else {
             patientsRepository.delete(patientToRemove)
         }
     }
-}
-
-private fun <T> Page<T>.toDomainModel(): SinglePage<T> {
-    return SinglePage(
-        pageNumber = this.pageable.pageNumber,
-        pageSize = pageable.pageSize,
-        totalNumberOfPages = totalPages,
-        elementsOnCurrentPage = this.content,
-    )
 }
