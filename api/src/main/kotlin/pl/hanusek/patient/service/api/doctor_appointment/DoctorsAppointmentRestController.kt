@@ -3,10 +3,7 @@ package pl.hanusek.patient.service.api.doctor_appointment
 import mu.KotlinLogging
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
-import pl.hanusek.patient.service.api.doctor_appointment.dto.CreateDoctorsAppointmentRequestDto
-import pl.hanusek.patient.service.api.doctor_appointment.dto.CreateDoctorsAppointmentResponseDto
-import pl.hanusek.patient.service.api.doctor_appointment.dto.DoctorsAppointmentDto
-import pl.hanusek.patient.service.api.doctor_appointment.dto.GetDoctorsAppointmentsResponseDto
+import pl.hanusek.patient.service.api.doctor_appointment.dto.*
 import pl.hanusek.patient.service.domain.FullName
 import pl.hanusek.patient.service.domain.OrderType
 import pl.hanusek.patient.service.domain.Pageable
@@ -46,12 +43,12 @@ class DoctorsAppointmentRestController(
     @PutMapping("/api/v1/doctors-appointment/{appointmentId}")
     fun changeTimeOfAppointment(
         @PathVariable appointmentId: String,
-        newTime: LocalTime
+        @RequestBody requestDto: ChangeDoctorsAppointmentTimeRequestDto
     ): DoctorsAppointmentDto {
         return doctorsAppointmentsFacade.changeTimeOfDoctorsAppointment(
             DoctorsAppointment.DoctorsAppointmentId.from(
                 appointmentId
-            ), newTime
+            ), requestDto.newTime
         )
             .toDtoModel()
     }

@@ -30,7 +30,7 @@ internal class DoctorsAppointmentsDbRepository(
     }
 
     override fun findDoctorAppointmentById(doctorsAppointmentId: DoctorsAppointment.DoctorsAppointmentId): DoctorsAppointment? {
-        return jpaRepository.findById(doctorsAppointmentId).orElse(null)
+        return jpaRepository.findById(doctorsAppointmentId.value).orElse(null)
     }
 
     override fun getAllDoctorsAppointment(patientId: Patient.PatientId?, pageable: Pageable): Page<DoctorsAppointment> {
@@ -48,7 +48,7 @@ internal class DoctorsAppointmentsDbRepository(
 }
 
 internal interface DoctorsAppointmentJpaRepository :
-    JpaRepository<DoctorsAppointment, DoctorsAppointment.DoctorsAppointmentId> {
+    JpaRepository<DoctorsAppointment, String> {
 
     fun findAllByPatientId(
         patientId: String,
