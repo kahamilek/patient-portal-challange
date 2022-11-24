@@ -42,11 +42,11 @@ class PatientsController(
     @PutMapping("/api/v1/patients/{patientId}")
     fun updatePatient(
         @PathVariable("patientId") patientId: String,
-        @RequestBody updateRequest: UpdatePatientRequestDto
+        @RequestBody updatePatientRequest: UpdatePatientRequestDto
     ): ResponseEntity<out UpdatePatientResponseDto> = kotlin.runCatching {
         patientsFacade.updatePatient(
             patientId = Patient.PatientId.from(patientId),
-            patientWithNewData = updateRequest.toDomainModel()
+            patientWithNewData = updatePatientRequest.toDomainModel()
         )
         ResponseEntity.ok(UpdatePatientResponseDto.Success())
     }.getOrElse {
