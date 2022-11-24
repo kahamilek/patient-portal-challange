@@ -1,6 +1,7 @@
 package pl.hanusek.patient.service.domain.patient
 
 import pl.hanusek.patient.service.domain.FullName
+import pl.hanusek.patient.service.domain.OrderType
 import pl.hanusek.patient.service.domain.SinglePage
 import pl.hanusek.patient.service.domain.organization.Organization
 
@@ -20,21 +21,7 @@ interface PatientsFacade {
     @Throws(PatientNotFoundException::class)
     fun removePatient(patientId: Patient.PatientId)
 
-
-    enum class OrderType {
-        ASC,
-        DESC;
-
-        companion object {
-            const val DEFAULT_ORDER_TYPE_TEXT = "ASC"
-
-            fun from(text: String): OrderType {
-                return OrderType.values()
-                    .firstOrNull { it.toString() == text }
-                    ?: ASC
-            }
-        }
-    }
+    fun getPatient(patientId: Patient.PatientId): Patient?
 
 
     data class PatientToUpdate(

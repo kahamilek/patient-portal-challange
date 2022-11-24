@@ -56,8 +56,8 @@ data class Doctor private constructor(
         val value: String
     ) {
         companion object {
-            fun from(patientId: String): DoctorId {
-                return DoctorId(patientId)
+            fun from(id: String): DoctorId {
+                return DoctorId(id)
             }
         }
     }

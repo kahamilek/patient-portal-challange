@@ -5,6 +5,7 @@ import org.springframework.data.domain.PageRequest
 import org.springframework.data.domain.Sort
 import org.springframework.data.jpa.repository.JpaRepository
 import org.springframework.stereotype.Component
+import pl.hanusek.patient.service.domain.OrderType
 import pl.hanusek.patient.service.domain.patient.Patient
 import pl.hanusek.patient.service.domain.patient.PatientsFacade
 import pl.hanusek.patient.service.domain.patient.PatientsRepository
@@ -25,7 +26,7 @@ internal class PatientsDbRepository(
         return save(patient)
     }
 
-    override fun getPatientsOnPage(pageNumber: Int, pageSize: Int, orderType: PatientsFacade.OrderType): Page<Patient> {
+    override fun getPatientsOnPage(pageNumber: Int, pageSize: Int, orderType: OrderType): Page<Patient> {
         return patientJpaRepository.findAll(
             PageRequest.of(
                 pageNumber,
@@ -45,12 +46,11 @@ internal class PatientsDbRepository(
 internal interface PatientJpaRepository : JpaRepository<Patient, String>
 
 
-private fun sortByProperty(property: String, orderType: PatientsFacade.OrderType): Sort {
+private fun sortByProperty(property: String, orderType: OrderType): Sort {
     val sort = Sort.by(property)
 
-    return when(orderType) {
-        PatientsFacade.OrderType.ASC -> sort.ascending()
-        PatientsFacade.OrderType.DESC -> sort.descending()
+    return when (orderType) {
+        OrderType.ASC -> sort.ascending()
+        OrderType.DESC -> sort.descending()
     }
 }
-

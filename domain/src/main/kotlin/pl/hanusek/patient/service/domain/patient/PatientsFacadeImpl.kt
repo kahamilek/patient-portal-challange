@@ -3,6 +3,7 @@ package pl.hanusek.patient.service.domain.patient
 import org.springframework.stereotype.Component
 import org.springframework.transaction.annotation.Transactional
 import pl.hanusek.patient.service.domain.FullName
+import pl.hanusek.patient.service.domain.OrderType
 import pl.hanusek.patient.service.domain.SinglePage
 import pl.hanusek.patient.service.domain.organization.Organization
 import pl.hanusek.patient.service.domain.organization.OrganizationsFacade
@@ -40,7 +41,7 @@ internal class PatientsFacadeImpl(
     override fun getPatients(
         pageNumber: Int,
         pageSize: Int,
-        orderType: PatientsFacade.OrderType
+        orderType: OrderType
     ): SinglePage<PatientsFacade.PatientWithOrganizationName> {
         val patientsOnPage = patientsRepository.getPatientsOnPage(pageNumber, pageSize, orderType)
 
@@ -60,5 +61,9 @@ internal class PatientsFacadeImpl(
         } else {
             patientsRepository.delete(patientToRemove)
         }
+    }
+
+    override fun getPatient(patientId: Patient.PatientId): Patient? {
+        return patientsRepository.findById(patientId)
     }
 }

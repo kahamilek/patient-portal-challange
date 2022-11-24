@@ -25,6 +25,8 @@ interface DoctorsFacade {
     @Throws(DoctorNotFoundException::class)
     fun removeDoctor(doctorId: Doctor.DoctorId)
 
+    fun getDoctor(attendingPhysicianId: Doctor.DoctorId): Doctor?
+
     data class DoctorWithOrganizationName(
         val doctor: Doctor,
         val organizationName: Organization.OrganizationName

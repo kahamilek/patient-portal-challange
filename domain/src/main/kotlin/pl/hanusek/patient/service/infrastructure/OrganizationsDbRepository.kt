@@ -13,10 +13,10 @@ internal class OrganizationsDbRepository(
 
     override fun getOrCreateIfNotExists(organizationName: Organization.OrganizationName): Organization {
         val newOrganization = Organization(organizationName)
-        return organizationsJpaRepository.insertOrGetAlreadyCreated(
+        return organizationsJpaRepository.insertNewIfNotExists(
             newOrganization.id.value,
             newOrganization.name.formattedName
-        )
+        ) ?: organizationsJpaRepository.findByName(newOrganization.name.formattedName)!!
     }
 
     override fun findById(id: String): Organization? {
@@ -37,5 +37,6 @@ internal interface OrganizationsJpaRepository : JpaRepository<Organization, Stri
             RETURNING *
         """
     )
-    fun insertOrGetAlreadyCreated(id: String, name: String): Organization
+    fun insertNewIfNotExists(id: String, name: String): Organization?
+    fun findByName(formattedName: String): Organization?
 }
