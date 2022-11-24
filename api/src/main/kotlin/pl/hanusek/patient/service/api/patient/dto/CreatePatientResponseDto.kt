@@ -6,7 +6,7 @@ import com.fasterxml.jackson.annotation.JsonTypeName
 @JsonTypeInfo(
     use = JsonTypeInfo.Id.NAME,
     include = JsonTypeInfo.As.PROPERTY,
-    property = "type"
+    property = "state"
 )
 sealed class CreatePatientResponseDto {
 
