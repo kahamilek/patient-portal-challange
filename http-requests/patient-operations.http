@@ -13,5 +13,27 @@ Content-Type: application/json
         "buildingNumber": "3",
         "apartmentNumber": null
     },
-    "organizationName": "Example"
+    "organizationName": "Example2"
+}
+
+###
+
+GET http://localhost:10000/api/v1/patients
+
+###
+PUT http://localhost:10000/api/v1/patients/c537f685-6af4-4ed8-89fd-6eb53e44bcac
+Content-Type: application/json
+
+{
+    "fullName": {
+        "firstName": "Not John",
+        "lastName": "Smith"
+    },
+    "address": {
+        "city": "Warszawa",
+        "postcode": "00-000",
+        "street": "Głogowska",
+        "buildingNumber": "44",
+        "apartmentNumber": null
+    }
 }
